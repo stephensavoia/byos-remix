@@ -379,7 +379,7 @@ const db = {
     {
       IngredientID: 31,
       IngredientName: "Black beans",
-      Category: "GRAINS",
+      Category: "GRAINS/LEGUMES",
       VitaminA: 17,
       VitaminC: 0,
       Calcium: 46,
@@ -390,7 +390,7 @@ const db = {
     {
       IngredientID: 32,
       IngredientName: "Buckwheat",
-      Category: "GRAINS",
+      Category: "GRAINS/LEGUMES",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 18,
@@ -401,7 +401,7 @@ const db = {
     {
       IngredientID: 33,
       IngredientName: "Millet",
-      Category: "GRAINS",
+      Category: "GRAINS/LEGUMES",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 5,
@@ -412,7 +412,7 @@ const db = {
     {
       IngredientID: 34,
       IngredientName: "Oats",
-      Category: "GRAINS",
+      Category: "GRAINS/LEGUMES",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 54,
@@ -423,7 +423,7 @@ const db = {
     {
       IngredientID: 35,
       IngredientName: "Quinoa",
-      Category: "GRAINS",
+      Category: "GRAINS/LEGUMES",
       VitaminA: 14,
       VitaminC: 0,
       Calcium: 31,
@@ -434,7 +434,7 @@ const db = {
     {
       IngredientID: 36,
       IngredientName: "Tofu",
-      Category: "GRAINS",
+      Category: "GRAINS/LEGUMES",
       VitaminA: 178,
       VitaminC: 0,
       Calcium: 253,
@@ -445,7 +445,7 @@ const db = {
     {
       IngredientID: 37,
       IngredientName: "Edamame",
-      Category: "GRAINS",
+      Category: "GRAINS/LEGUMES",
       VitaminA: 23,
       VitaminC: 9.5,
       Calcium: 98,
@@ -456,7 +456,7 @@ const db = {
     {
       IngredientID: 38,
       IngredientName: "White beans",
-      Category: "GRAINS",
+      Category: "GRAINS/LEGUMES",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 161,
@@ -467,7 +467,7 @@ const db = {
     {
       IngredientID: 39,
       IngredientName: "Almonds",
-      Category: "NUTS",
+      Category: "NUTS/SEEDS",
       VitaminA: 1,
       VitaminC: 0,
       Calcium: 243,
@@ -478,7 +478,7 @@ const db = {
     {
       IngredientID: 40,
       IngredientName: "Brazil nuts",
-      Category: "NUTS",
+      Category: "NUTS/SEEDS",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 213,
@@ -489,7 +489,7 @@ const db = {
     {
       IngredientID: 41,
       IngredientName: "Cashews",
-      Category: "NUTS",
+      Category: "NUTS/SEEDS",
       VitaminA: 0,
       VitaminC: 0.1,
       Calcium: 37,
@@ -500,7 +500,7 @@ const db = {
     {
       IngredientID: 42,
       IngredientName: "Chia seeds",
-      Category: "NUTS",
+      Category: "NUTS/SEEDS",
       VitaminA: 0,
       VitaminC: 1.6,
       Calcium: 631,
@@ -511,7 +511,7 @@ const db = {
     {
       IngredientID: 43,
       IngredientName: "Flaxseeds",
-      Category: "NUTS",
+      Category: "NUTS/SEEDS",
       VitaminA: 0,
       VitaminC: 0.6,
       Calcium: 428,
@@ -522,7 +522,7 @@ const db = {
     {
       IngredientID: 44,
       IngredientName: "Hemp seeds",
-      Category: "NUTS",
+      Category: "NUTS/SEEDS",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 70,
@@ -533,7 +533,7 @@ const db = {
     {
       IngredientID: 45,
       IngredientName: "Macadamia nuts",
-      Category: "NUTS",
+      Category: "NUTS/SEEDS",
       VitaminA: 0,
       VitaminC: 0.7,
       Calcium: 114,
@@ -544,7 +544,7 @@ const db = {
     {
       IngredientID: 46,
       IngredientName: "Acai",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 750,
       VitaminC: 15,
       Calcium: 35,
@@ -555,7 +555,7 @@ const db = {
     {
       IngredientID: 47,
       IngredientName: "Camu camu",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 0,
       VitaminC: 2800,
       Calcium: 27,
@@ -566,7 +566,7 @@ const db = {
     {
       IngredientID: 48,
       IngredientName: "Cacao (or cocoa)",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 2,
       VitaminC: 0.1,
       Calcium: 56,
@@ -577,7 +577,7 @@ const db = {
     {
       IngredientID: 49,
       IngredientName: "Cinnamon",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 295,
       VitaminC: 0.3,
       Calcium: 280,
@@ -588,7 +588,7 @@ const db = {
     {
       IngredientID: 50,
       IngredientName: "Chlorella",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 2870,
       VitaminC: 10,
       Calcium: 221,
@@ -599,7 +599,7 @@ const db = {
     {
       IngredientID: 51,
       IngredientName: "Dates",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 10,
       VitaminC: 0.4,
       Calcium: 15,
@@ -610,7 +610,7 @@ const db = {
     {
       IngredientID: 52,
       IngredientName: "Ginger",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 0,
       VitaminC: 5,
       Calcium: 16,
@@ -621,7 +621,7 @@ const db = {
     {
       IngredientID: 53,
       IngredientName: "Goji berries",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 2905,
       VitaminC: 48,
       Calcium: 53,
@@ -632,7 +632,7 @@ const db = {
     {
       IngredientID: 54,
       IngredientName: "Fresh herbs",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 5900,
       VitaminC: 133,
       Calcium: 138,
@@ -643,7 +643,7 @@ const db = {
     {
       IngredientID: 55,
       IngredientName: "Maca",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 0,
       VitaminC: 2,
       Calcium: 25,
@@ -654,7 +654,7 @@ const db = {
     {
       IngredientID: 56,
       IngredientName: "Moringa",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 3780,
       VitaminC: 164,
       Calcium: 150,
@@ -665,7 +665,7 @@ const db = {
     {
       IngredientID: 57,
       IngredientName: "Ground stevia",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 0,
@@ -676,7 +676,7 @@ const db = {
     {
       IngredientID: 58,
       IngredientName: "Turmeric",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 0,
       VitaminC: 0.9,
       Calcium: 17,
@@ -687,7 +687,7 @@ const db = {
     {
       IngredientID: 59,
       IngredientName: "Vanilla",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 11,
@@ -698,7 +698,7 @@ const db = {
     {
       IngredientID: 60,
       IngredientName: "Vegan yogurt",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 0,
       VitaminC: 0.3,
       Calcium: 200,
@@ -709,7 +709,7 @@ const db = {
     {
       IngredientID: 61,
       IngredientName: "Mint",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 3388,
       VitaminC: 31.8,
       Calcium: 199,
@@ -720,7 +720,7 @@ const db = {
     {
       IngredientID: 62,
       IngredientName: "Parsley",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 5054,
       VitaminC: 133,
       Calcium: 138,
@@ -731,7 +731,7 @@ const db = {
     {
       IngredientID: 63,
       IngredientName: "Lime",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 50,
       VitaminC: 19.5,
       Calcium: 22,
@@ -742,7 +742,7 @@ const db = {
     {
       IngredientID: 64,
       IngredientName: "Lemon",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 22,
       VitaminC: 53,
       Calcium: 26,
@@ -753,7 +753,7 @@ const db = {
     {
       IngredientID: 65,
       IngredientName: "Lime",
-      Category: "SUPERFOODS",
+      Category: "SUPERFOODS/FLAVORS",
       VitaminA: 0,
       VitaminC: 0,
       Calcium: 0,
