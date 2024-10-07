@@ -1,5 +1,6 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, Link, useActionData, useLoaderData } from "@remix-run/react";
+import { useEffect, useRef } from "react";
 import IngredientCategorySelect from "~/components/IngredientCategorySelect";
 import { getIngredients } from "~/db/smoothies";
 
@@ -61,21 +62,62 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function Index() {
+  const mainDivTest = useRef<HTMLDivElement>(null);
   const { groupedIngredients } = useLoaderData<typeof loader>();
+  const response = useActionData();
+
+  useEffect(() => {
+    if (response && mainDivTest.current) {
+      mainDivTest.current.innerHTML = JSON.stringify(response);
+    }
+  }, [response]);
 
   return (
-    <div>
-      <h1>Ingredients</h1>
-      <Form method="post">
-        {Object.keys(groupedIngredients).map((category) => (
-          <IngredientCategorySelect
-            key={category.substring(0, 3)}
-            category={category}
-            ingredients={groupedIngredients[category]}
-          />
-        ))}
-        <button type="submit">Submit</button>
-      </Form>
-    </div>
+    <>
+      <div ref={mainDivTest} className="max-w-[825px] m-auto">
+        {/* <label className="px-4 lg:px-0">SELECT YOUR INGREDIENTS:</label> */}
+        <Form method="post">
+          {Object.keys(groupedIngredients).map((category) => (
+            <IngredientCategorySelect
+              key={category.substring(0, 3)}
+              category={category}
+              ingredients={groupedIngredients[category]}
+            />
+          ))}
+          <label className="form-control w-full">
+            <div className="label text-base px-4 lg:px-0">
+              NAME YOUR SMOOTHIE:
+            </div>
+            <input
+              type="text"
+              placeholder={`e.g. "Green Mojito Smoothie"`}
+              className="input input-bordered mx-4 lg:mx-0 w-full placeholder-italic"
+            />
+          </label>
+          <button type="submit" className="btn btn-neutral block my-4 mx-auto">
+            BUILD SMOOTHIE
+          </button>
+        </Form>
+        <div className="divider text-base">OUR MINDSET</div>
+        <div className="hero min-h-18">
+          <div className="hero-content text-center">
+            <div className="max-w-lg">
+              <h1 className="text-5xl font-bold">
+                ENJOY THE HEALTHY FOODS YOU LOVE
+              </h1>
+              <p className="py-6">
+                If you try to have good health, you rae inundated by . Clafasd.
+                Reverse approach. Choose the foods you want! THe foods you're
+                graving (from healthy whol food options, of course) and we'll
+                let you know what benefits of the food are.
+              </p>
+              <Link to="/" className="link link-reverse-hover">
+                Get Started
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

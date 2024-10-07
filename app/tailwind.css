@@ -6,7 +6,46 @@ html,
 body {
   @apply bg-white dark:bg-gray-950;
 
+  font-family: "Montserrat", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+h1 {
+  font-family: "Cormorant Garamond", system-ui;
+  font-weight: 400;
+  font-size: 1.86rem;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.checkbox-primary {
+  --chkfg: #000;
+  border-radius: 50%;
+}
+
+.card.card-compact {
+  grid-auto-flow: row;
+}
+
+.card-compact .card-body {
+  padding: 1rem 0;
+}
+
+.placeholder-italic::placeholder {
+  font-style: italic;
+}
+
+.link {
+  @apply underline-offset-2;
+}
+
+.link-reverse-hover:hover {
+  text-decoration: none;
 }
