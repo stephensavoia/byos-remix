@@ -6,7 +6,7 @@ html,
 body {
   @apply bg-white dark:bg-gray-950;
 
-  font-family: "Montserrat", system-ui;
+  font-family: "Figtree", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 
@@ -25,11 +25,11 @@ h1 {
   flex: 4;
 }
 
-.checkbox-primary {
-  --chkfg: #000;
-  border-radius: 50%;
+.link {
+  @apply underline-offset-2;
 }
 
+/* Navbar */
 .card.card-compact {
   grid-auto-flow: row;
 }
@@ -38,14 +38,17 @@ h1 {
   padding: 1rem 0;
 }
 
+/* _index.tsx */
+.checkbox-primary {
+  --chkfg: #000;
+  border-radius: 50%;
+}
+
 .placeholder-italic::placeholder {
   font-style: italic;
 }
 
-.link {
-  @apply underline-offset-2;
-}
-
-.link-reverse-hover:hover {
-  text-decoration: none;
+.btn-neutral:hover {
+  background-color: #2a2a2a;
+  border-color: #2a2a2a;
 }

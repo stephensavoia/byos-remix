@@ -13,21 +13,22 @@ OVERVIEW:
 
 DONE:
 
-- add fonts (cormorant garamont and montserrat)
+- add fonts (cormorant garamont and figtree)
 - style smoothie name input
+- line up items checkbox on input page
+- style submit button
 
 TO DO:
 
-- line up items checkbox on input page
-- style submit button
-- make max checks for each category
-- form validation
-
+- change theme colors (light gray to new light gray)
 - style blender menu "ad" and make it at bottom of drawer
-
 - add favicon
-- make "build your smoothie now" link go to top of page
 - write copy for "our mindset"
 - add footer links (social and non-social)
+- add footer info/copyright
+
+- make max checks for each category
+- form validation
+- make action function create a get link to a recipe page in format "{IngredientID}A{AMOUNT}C{IngredientID}A{AMOUNT}" e.g. "/recipe/1A12C3A4C9A6", where "AMOUNT" is /12 (can be cups or tbsp, depends on ingredient category, but that can be found from database and doesn't need to be encoded)
 
 - get clock and fork/knife icons
