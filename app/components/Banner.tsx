@@ -4,7 +4,7 @@ const Banner = () => {
   return (
     <Link
       to="/"
-      className="bg-black text-white text-sm font-semibold flex w-full justify-center p-2"
+      className="bg-black text-white text-sm font-semibold flex w-full justify-center p-2 mb-1.5"
     >
       <div className="flex items-center">
         VIEW OUR RECOMMENDED BLENDERS

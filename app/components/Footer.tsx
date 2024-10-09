@@ -1,54 +1,115 @@
+import { Link } from "@remix-run/react";
+
 const Footer = () => {
   return (
-    <footer className="footer bg-base-300 text-base-content p-10">
-      <nav>
-        <h6 className="footer-title">Information</h6>
-        <a className="link link-hover">About</a>
-        <a className="link link-hover">alessandracardin.com</a>
-        <a className="link link-hover">Marketing</a>
-        <a className="link link-hover">Advertisement</a>
+    <footer className="footer bg-base-300 text-base-content py-10 px-16 flex flex-col lg:flex-row">
+      <nav className="flex-1">
+        <h6 className="footer-title">Info</h6>
+        <span>
+          <em>Build Your Own Smoothie</em> lets
+          <br />
+          you create a perfectly proportioned
+          <br />
+          smoothie recipe in seconds.
+        </span>
+        <span>
+          &copy; 2024{" "}
+          <Link to="/" className="link link-hover">
+            Alessandra Cardin.
+          </Link>
+          <br />
+          All rights reserved.
+        </span>
       </nav>
-      <nav>
-        <h6 className="footer-title">Company</h6>
-        <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
+      <nav className="flex-1">
+        <h6 className="footer-title">Links</h6>
+        <Link to="/" className="link link-hover">
+          About
+        </Link>
+        <Link to="/" className="link link-hover">
+          Buy a Blender
+        </Link>
+        <Link to="/" className="link link-hover">
+          Browser Recipes
+        </Link>
+        <Link to="/" className="link link-hover">
+          Build a Smoothie
+        </Link>
       </nav>
-      <nav>
+      <nav className="flex-1">
         <h6 className="footer-title">Social</h6>
         <div className="grid grid-flow-col gap-4">
-          <a>
+          <a href="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
+              viewBox="0 4.5 24 24"
+              fill="#000000"
+              version="1.1"
+              strokeWidth={0.5}
+              stroke="currentColor"
+              height="32"
+              width="32"
             >
-              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+              <title />
+
+              <g id="Complete">
+                <g id="mail">
+                  <g>
+                    <polyline
+                      fill="none"
+                      points="4 8.2 12 14.1 20 8.2"
+                      stroke="#000000"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+
+                    <rect
+                      fill="none"
+                      height="14.5"
+                      rx="2"
+                      ry="2"
+                      stroke="#000000"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      width="18"
+                      x="3"
+                      y="6.5"
+                    />
+                  </g>
+                </g>
+              </g>
             </svg>
           </a>
-          <a>
+          <a href="/">
             <svg
+              fill="#000000"
+              version="1.1"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
+              viewBox="0 0 169.063 169.063"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
             >
-              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-            </svg>
-          </a>
-          <a>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
-            >
-              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+              <g>
+                <path
+                  d="M122.406,0H46.654C20.929,0,0,20.93,0,46.655v75.752c0,25.726,20.929,46.655,46.654,46.655h75.752
+		c25.727,0,46.656-20.93,46.656-46.655V46.655C169.063,20.93,148.133,0,122.406,0z M154.063,122.407
+		c0,17.455-14.201,31.655-31.656,31.655H46.654C29.2,154.063,15,139.862,15,122.407V46.655C15,29.201,29.2,15,46.654,15h75.752
+		c17.455,0,31.656,14.201,31.656,31.655V122.407z"
+                />
+                <path
+                  d="M84.531,40.97c-24.021,0-43.563,19.542-43.563,43.563c0,24.02,19.542,43.561,43.563,43.561s43.563-19.541,43.563-43.561
+		C128.094,60.512,108.552,40.97,84.531,40.97z M84.531,113.093c-15.749,0-28.563-12.812-28.563-28.561
+		c0-15.75,12.813-28.563,28.563-28.563s28.563,12.813,28.563,28.563C113.094,100.281,100.28,113.093,84.531,113.093z"
+                />
+                <path
+                  d="M129.921,28.251c-2.89,0-5.729,1.17-7.77,3.22c-2.051,2.04-3.23,4.88-3.23,7.78c0,2.891,1.18,5.73,3.23,7.78
+		c2.04,2.04,4.88,3.22,7.77,3.22c2.9,0,5.73-1.18,7.78-3.22c2.05-2.05,3.22-4.89,3.22-7.78c0-2.9-1.17-5.74-3.22-7.78
+		C135.661,29.421,132.821,28.251,129.921,28.251z"
+                />
+              </g>
             </svg>
           </a>
         </div>

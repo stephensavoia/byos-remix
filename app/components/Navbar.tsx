@@ -1,9 +1,9 @@
 const Navbar = () => {
   return (
-    <div className="drawer drawer-end">
+    <div className="drawer drawer-end px-4">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        <div className="navbar bg-base-100 flex max-w-[825px] m-auto px-4 lg:px-0">
+        <div className="navbar bg-base-100 flex max-w-[825px] m-auto px-4">
           <div className="flex-1 justify-start">
             {/* <button className="btn btn-neutral">+ Build a Smoothie</button> */}
           </div>
@@ -65,7 +65,7 @@ const Navbar = () => {
             <a>BUILD A SMOOTHIE</a>
           </li>
           <li>
-            <a>BROWSE SMOOTHIE RECIPES</a>
+            <a>BROWSE RECIPES</a>
           </li>
           <li>
             <a>BUY A BLENDER</a>
@@ -73,8 +73,8 @@ const Navbar = () => {
           <li>
             <a>ABOUT</a>
           </li>
-          <li>
-            <div className="card card-compact bg-base-100 w-96 shadow-xl">
+          <li className="mt-auto mb-4">
+            <div className="card card-compact bg-base-100 hover:bg-base-100 active:bg-base-100 w-96 shadow-lg">
               <figure>
                 <img
                   src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -83,7 +83,9 @@ const Navbar = () => {
               </figure>
               <div className="card-body">
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary w-full">Buy Now</button>
+                  <button className="btn btn-neutral w-full">
+                    BUY A BLENDER
+                  </button>
                 </div>
               </div>
             </div>

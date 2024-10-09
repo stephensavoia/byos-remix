@@ -17,15 +17,17 @@ DONE:
 - style smoothie name input
 - line up items checkbox on input page
 - style submit button
-
-TO DO:
-
 - change theme colors (light gray to new light gray)
-- style blender menu "ad" and make it at bottom of drawer
 - add favicon
+- style blender menu "ad" and make it at bottom of drawer
 - write copy for "our mindset"
 - add footer links (social and non-social)
 - add footer info/copyright
+
+TO DO:
+
+- add blender picture
+- add meta tag OG tag
 
 - make max checks for each category
 - form validation

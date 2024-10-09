@@ -6,7 +6,7 @@ import { getIngredients } from "~/db/smoothies";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Build Your Own Smoothie | Alessandra Cardin" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
@@ -99,16 +99,23 @@ export default function Index() {
             BUILD SMOOTHIE
           </button>
         </Form>
-        <div className="divider text-base px-4">OUR MINDSET</div>
-        <div className="hero">
+        <div className="divider text-base px-4">YOUR NEW MINDSET</div>
+        <div className="hero px-4">
           <div className="hero-content text-center pb-6">
-            <div className="max-w-lg">
+            <div className="max-w-xl">
               <h1 className="text-5xl">ENJOY THE HEALTHY FOODS YOU LOVE</h1>
               <p className="py-6">
-                If you try to have good health, you rae inundated by . Clafasd.
-                Reverse approach. Choose the foods you want! THe foods you're
-                graving (from healthy whol food options, of course) and we'll
-                let you know what benefits of the food are.
+                Eating healthy can be tough these days. We're bombarded with
+                rules—"Eat this much of this vitamin, that many calories, and
+                these nutrients." I created <em>Build Your Own Smoothie</em> to
+                flip that approach. Just pick the foods you're craving (from a
+                list of healthy, whole food options), and with one click, you'll
+                get a perfectly portioned smoothie recipe, along with its health
+                benefits. Satisfy your cravings first, and take note of the
+                health perks after!
+              </p>
+              <p>
+                <em>—Alessandra Cardin</em>
               </p>
             </div>
           </div>

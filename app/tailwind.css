@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --b2: 97.63% 0.0029 84.56;
+  --b3: 93.25% 0.0052 67.76;
+}
+
 html,
 body {
   @apply bg-white dark:bg-gray-950;
@@ -36,6 +41,10 @@ h1 {
 
 .card-compact .card-body {
   padding: 1rem 0;
+}
+
+.menu li > div.card:active {
+  background-color: #fff;
 }
 
 /* _index.tsx */
