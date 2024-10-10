@@ -1,13 +1,34 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
-import { Form, Link, useActionData, useLoaderData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import IngredientCategorySelect from "~/components/IngredientCategorySelect";
 import { getIngredients } from "~/db/smoothies";
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap((match) => match.meta ?? []);
   return [
+    ...parentMeta,
     { title: "Build Your Own Smoothie | Alessandra Cardin" },
-    { name: "description", content: "Welcome to Remix!" },
+    {
+      name: "description",
+      content:
+        "Build Your Own Smoothie lets you create a perfectly proportioned smoothie recipe in seconds. Pick the foods you're craving from a list of healthy, whole food options), and with one click you're done!",
+    },
+    { name: "og:url", content: "https://www.buildyourownsmoothie.com/" },
+    { name: "og:type", content: "website" },
+    {
+      name: "og:title",
+      content: "Build Your Own Smoothie | Alessandra Cardin",
+    },
+    {
+      name: "og:description",
+      content:
+        "Build Your Own Smoothie lets you create a perfectly proportioned smoothie recipe in seconds. Pick the foods you're craving from a list of healthy, whole food options), and with one click you're done!",
+    },
+    {
+      name: "og:image",
+      content: "https://www.buildyourownsmoothie.com/img/blender-og.png",
+    },
   ];
 };
 
@@ -32,24 +53,55 @@ export async function loader() {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  console.log("Form data", formData);
+  const groupedIngredients: { [key: string]: number[] } = {};
+  let smoothieName = "My Smoothie";
+  const smoothieIngredients: { IngredientID: number; Quantity: number }[] = [];
 
-  // should return this ( what's needed to mke a new recipe entry with prisma)
+  for (let [key, value] of formData.entries()) {
+    if (groupedIngredients[key]) {
+      groupedIngredients[key].push(Number(value));
+    } else {
+      if (key === "smoothieName") {
+        smoothieName = String(value);
+      } else {
+        groupedIngredients[key] = [Number(value)];
+      }
+    }
+  }
+
+  const quantityKey: {
+    [key in "LIQ" | "FRU" | "VEG" | "GRA" | "NUT" | "SUP"]: number;
+  } = {
+    LIQ: 1,
+    FRU: 2,
+    VEG: 1,
+    GRA: 0.25,
+    NUT: 2,
+    SUP: 3,
+  };
+
+  for (const [key, value] of Object.entries(groupedIngredients)) {
+    const quantity = Number(
+      quantityKey[key as keyof typeof quantityKey] / value.length
+    );
+    console.log("value.length", value.length);
+    console.log(
+      "quantityKey[key as keyof typeof quantityKey]",
+      quantityKey[key as keyof typeof quantityKey]
+    );
+    console.log("quantity", quantity);
+
+    value.forEach((ingredientId) => {
+      smoothieIngredients.push({
+        IngredientID: ingredientId,
+        Quantity: quantity,
+      });
+    });
+  }
+
   const data = {
-    UserID: 1, // Replace with the actual UserID
-    RecipeName: "Green Smoothie",
-    Ingredients: {
-      create: [
-        {
-          IngredientID: 1, // Replace with the actual IngredientID
-          Quantity: 2.5,
-        },
-        {
-          IngredientID: 2, // Replace with the actual IngredientID
-          Quantity: 1.0,
-        },
-      ],
-    },
+    RecipeName: smoothieName,
+    Ingredients: smoothieIngredients,
   };
 
   // return data in response
@@ -64,7 +116,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function Index() {
   const mainDivTest = useRef<HTMLDivElement>(null);
   const { groupedIngredients } = useLoaderData<typeof loader>();
-  const response = useActionData();
+  const response = useActionData<typeof action>();
+
+  useEffect(() => {
+    console.log("response", response);
+  });
 
   useEffect(() => {
     if (response && mainDivTest.current) {
@@ -75,7 +131,6 @@ export default function Index() {
   return (
     <>
       <div ref={mainDivTest} className="max-w-[825px] m-auto">
-        {/* <label className="px-4 lg:px-0">SELECT YOUR INGREDIENTS:</label> */}
         <Form method="post">
           {Object.keys(groupedIngredients).map((category) => (
             <IngredientCategorySelect
@@ -87,6 +142,7 @@ export default function Index() {
           <label className="form-control w-full px-4">
             <div className="label text-base">NAME YOUR SMOOTHIE:</div>
             <input
+              name="smoothieName"
               type="text"
               placeholder={`e.g. "Green Mojito Smoothie"`}
               className="input input-bordered w-full placeholder-italic"
@@ -101,7 +157,7 @@ export default function Index() {
         </Form>
         <div className="divider text-base px-4">YOUR NEW MINDSET</div>
         <div className="hero px-4">
-          <div className="hero-content text-center pb-6">
+          <div className="hero-content text-center pb-8">
             <div className="max-w-xl">
               <h1 className="text-5xl">ENJOY THE HEALTHY FOODS YOU LOVE</h1>
               <p className="py-6">

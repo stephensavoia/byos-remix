@@ -59,9 +59,9 @@ const Footer = () => {
                       fill="none"
                       points="4 8.2 12 14.1 20 8.2"
                       stroke="#000000"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
                     />
 
                     <rect
@@ -70,9 +70,9 @@ const Footer = () => {
                       rx="2"
                       ry="2"
                       stroke="#000000"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
                       width="18"
                       x="3"
                       y="6.5"

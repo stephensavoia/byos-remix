@@ -76,10 +76,7 @@ const Navbar = () => {
           <li className="mt-auto mb-4">
             <div className="card card-compact bg-base-100 hover:bg-base-100 active:bg-base-100 w-96 shadow-lg">
               <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes"
-                />
+                <img src="img/blender.jpg" alt="Blender" />
               </figure>
               <div className="card-body">
                 <div className="card-actions justify-end">

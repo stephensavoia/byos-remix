@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface IngredientCategorySelectProps {
   category: string;
   ingredients: any[];
@@ -7,6 +9,19 @@ const IngredientCategorySelect: React.FC<IngredientCategorySelectProps> = ({
   category,
   ingredients,
 }) => {
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const ingredientID = event.target.value;
+    if (event.target.checked) {
+      setSelectedIngredients([...selectedIngredients, ingredientID]);
+    } else {
+      setSelectedIngredients(
+        selectedIngredients.filter((id) => id !== ingredientID)
+      );
+    }
+  };
+
   const categoryCode = category.substring(0, 3);
 
   // Formula for categoryTitleHeight is 4.25 + 2.25 * (number of rows)
@@ -15,18 +30,18 @@ const IngredientCategorySelect: React.FC<IngredientCategorySelectProps> = ({
   // Default values are for 1 row of ingredients (i.e. the LIQUID category)
   let categoryTitleHeight = `h-[8.75rem] lg:h-[6.5rem]`;
   let checkboxUlHeight = `h-[4.5rem] lg:h-[2.25rem]`;
-  let maxChoices = "1";
+  let maxChoices = 1;
 
   switch (categoryCode) {
     case "FRU":
       categoryTitleHeight = `h-[22.25rem] lg:h-[13.25rem]`;
       checkboxUlHeight = `h-[18rem] lg:h-[9rem]`;
-      maxChoices = "1 – 4";
+      maxChoices = 4;
       break;
     case "VEG":
       categoryTitleHeight = `h-[17.75rem] lg:h-[11rem]`;
       checkboxUlHeight = `h-[13.5rem] lg:h-[6.75rem]`;
-      maxChoices = "1 – 2";
+      maxChoices = 2;
       break;
     case "GRA":
       categoryTitleHeight = `h-[13.25rem] lg:h-[8.75rem]`;
@@ -35,12 +50,12 @@ const IngredientCategorySelect: React.FC<IngredientCategorySelectProps> = ({
     case "NUT":
       categoryTitleHeight = `h-[13.25rem] lg:h-[8.75rem]`;
       checkboxUlHeight = `h-[9rem] lg:h-[4.5rem]`;
-      maxChoices = "1 – 2";
+      maxChoices = 2;
       break;
     case "SUP":
       categoryTitleHeight = `h-[26.75rem] lg:h-[15.5rem]`;
       checkboxUlHeight = `h-[22.5rem] lg:h-[11.25rem]`;
-      maxChoices = "1 – 3";
+      maxChoices = 3;
       break;
   }
 
@@ -59,7 +74,7 @@ const IngredientCategorySelect: React.FC<IngredientCategorySelectProps> = ({
         className={`w-full bg-[#f8f7f5] ${categoryTitleHeight} my-1.5 pl-1 py-[1.25rem]`}
       >
         <span className="block text-base h-[1.75rem] w-1/2 md:w-1/4">
-          CHOOSE {maxChoices}
+          {`CHOOSE 1${maxChoices > 1 ? ` – ${maxChoices}` : ""}`}
         </span>
         <ul className={`flex flex-col flex-wrap ${checkboxUlHeight} w-full`}>
           {ingredients.map((ingredient) => (
@@ -73,6 +88,13 @@ const IngredientCategorySelect: React.FC<IngredientCategorySelectProps> = ({
                   name={categoryCode}
                   value={ingredient.IngredientID}
                   className="checkbox checkbox-primary checkbox-xs"
+                  onChange={handleCheckboxChange}
+                  disabled={
+                    selectedIngredients.length >= maxChoices &&
+                    !selectedIngredients.includes(
+                      String(ingredient.IngredientID)
+                    )
+                  }
                 />
                 <span className="label-text text-base pl-1">
                   {ingredient.IngredientName}
