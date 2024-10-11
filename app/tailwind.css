@@ -58,8 +58,8 @@ h1 {
 }
 
 .btn-neutral:hover {
-  background-color: #2a2a2a;
-  border-color: #2a2a2a;
+  background-color: #333;
+  border-color: #333;
 }
 
 label:has(input[type="checkbox"]:disabled) {

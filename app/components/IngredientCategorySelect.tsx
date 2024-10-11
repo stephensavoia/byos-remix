@@ -3,11 +3,13 @@ import { useState } from "react";
 interface IngredientCategorySelectProps {
   category: string;
   ingredients: any[];
+  error: string | null;
 }
 
 const IngredientCategorySelect: React.FC<IngredientCategorySelectProps> = ({
   category,
   ingredients,
+  error,
 }) => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
@@ -64,17 +66,51 @@ const IngredientCategorySelect: React.FC<IngredientCategorySelectProps> = ({
   return (
     <div className="flex items-start px-4">
       <h2
-        className={`w-16 ${categoryTitleHeight} flex items-center justify-center bg-[#f8f7f5] my-1.5`}
+        className={`w-16 ${
+          error &&
+          (selectedIngredients.length < 1 ||
+            selectedIngredients.length > maxChoices)
+            ? "bg-red-100"
+            : "bg-[#f8f7f5]"
+        } ${categoryTitleHeight} flex items-center justify-center bg-[#f8f7f5] my-1.5`}
       >
         <span className="transform -rotate-90 block leading-5 text-center">
           {category}
         </span>
       </h2>
       <div
-        className={`w-full bg-[#f8f7f5] ${categoryTitleHeight} my-1.5 pl-1 py-[1.25rem]`}
+        className={`w-full ${
+          error &&
+          (selectedIngredients.length < 1 ||
+            selectedIngredients.length > maxChoices)
+            ? "bg-red-100"
+            : "bg-[#f8f7f5]"
+        }  ${categoryTitleHeight} my-1.5 pl-1 py-[1.25rem]`}
       >
-        <span className="block text-base h-[1.75rem] w-1/2 md:w-1/4">
+        <span className="flex text-base h-7 align-center items-center w-full">
           {`CHOOSE 1${maxChoices > 1 ? ` – ${maxChoices}` : ""}`}
+          {error &&
+          (selectedIngredients.length < 1 ||
+            selectedIngredients.length > maxChoices) ? (
+            <div className="badge badge-error h-6 text-base ml-4 flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                />
+              </svg>
+
+              <span className="inline-block ml-1">{error}</span>
+            </div>
+          ) : null}
         </span>
         <ul className={`flex flex-col flex-wrap ${checkboxUlHeight} w-full`}>
           {ingredients.map((ingredient) => (
