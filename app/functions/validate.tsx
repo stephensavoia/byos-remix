@@ -1,21 +1,29 @@
-export async function validate(email: string, password: string) {
-  let errors: { email?: string; password?: string } = {};
+import { GroupedIngredients } from "~/types/GroupedIngredients";
+
+export async function validate(groupedIngredients: GroupedIngredients) {
+  console.log("groupedIngredientsVALIDATE: ", groupedIngredients);
+  let errors: {
+    LIQ?: string;
+    FRU?: string;
+    VEG?: string;
+    GRA?: string;
+    NUT?: string;
+    SUP?: string;
+  } = {};
 
   switch (true) {
-    case !email:
-      errors.email = "Email is required.";
-      break;
-    case !email.includes("@"):
-      errors.email = "Please enter a valid email address.";
-      break;
-    default:
-      break;
-  }
-
-  switch (true) {
-    case !password:
-      errors.password = "Password is required.";
-      break;
+    case !groupedIngredients.LIQ?.length:
+      errors.LIQ = "CHOOSE A LIQUID";
+    case !groupedIngredients.FRU?.length:
+      errors.FRU = "CHOOSE A FRUIT";
+    case !groupedIngredients.VEG?.length:
+      errors.VEG = "CHOOSE A VEGETABLE";
+    case !groupedIngredients.GRA?.length:
+      errors.GRA = "CHOOSE A GRAIN";
+    case !groupedIngredients.NUT?.length:
+      errors.NUT = "CHOOSE A NUT";
+    case !groupedIngredients.SUP?.length:
+      errors.SUP = "CHOOSE A SUPPLEMENT";
     default:
       break;
   }

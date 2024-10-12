@@ -1,9 +1,16 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 import type { ActionResultErrors } from "~/types/ActionResultErrors";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import {
+  Form,
+  json,
+  redirect,
+  useActionData,
+  useLoaderData,
+} from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import IngredientCategorySelect from "~/components/IngredientCategorySelect";
 import { getIngredients } from "~/db/smoothies";
+import { validate } from "~/functions/validate";
 
 export const meta: MetaFunction = ({ matches }) => {
   const parentMeta = matches.flatMap((match) => match.meta ?? []);
@@ -36,66 +43,72 @@ export const meta: MetaFunction = ({ matches }) => {
 export async function loader() {
   const ingredients = getIngredients();
 
-  const groupedIngredients = ingredients.reduce((acc: any, ingredient: any) => {
-    const category = ingredient.Category;
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push({
-      IngredientID: ingredient.IngredientID,
-      IngredientName: ingredient.IngredientName,
-      Category: ingredient.Category,
-    });
-    return acc;
-  }, {});
+  const groupedIngredientData = ingredients.reduce(
+    (acc: any, ingredient: any) => {
+      const category = ingredient.Category;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push({
+        IngredientID: ingredient.IngredientID,
+        IngredientName: ingredient.IngredientName,
+        Category: ingredient.Category,
+      });
+      return acc;
+    },
+    {}
+  );
 
-  return { groupedIngredients };
+  return { groupedIngredientData };
 }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  // const formData = await request.formData();
-  // const groupedIngredients: { [key: string]: number[] } = {};
-  // let smoothieName = "My Smoothie";
-  // const smoothieIngredients: { IngredientID: number; Quantity: number }[] = [];
+  const formData = await request.formData();
+  const groupedIngredients: { [key: string]: number[] } = {};
+  let smoothieName = "My Smoothie";
+  const smoothieIngredients: { IngredientID: number; Quantity: number }[] = [];
 
-  // for (let [key, value] of formData.entries()) {
-  //   if (groupedIngredients[key]) {
-  //     groupedIngredients[key].push(Number(value));
-  //   } else {
-  //     if (key === "smoothieName") {
-  //       smoothieName = String(value);
-  //     } else {
-  //       groupedIngredients[key] = [Number(value)];
-  //     }
-  //   }
-  // }
+  for (let [key, value] of formData.entries()) {
+    if (groupedIngredients[key]) {
+      groupedIngredients[key].push(Number(value));
+    } else {
+      if (key === "smoothieName") {
+        smoothieName = String(value);
+      } else {
+        groupedIngredients[key] = [Number(value)];
+      }
+    }
+  }
 
-  // console.log(groupedIngredients);
+  console.log("formData: ", formData);
+  console.log("groupedIngredients: ", groupedIngredients);
 
-  // // "Units" out of 4. So 4 --> 1 cups/tbsp, 8 --> 2 cups/tbsp, 1 --> 0.25 cups/tbsp, etc.
-  // const quantityKey: {
-  //   [key in "LIQ" | "FRU" | "VEG" | "GRA" | "NUT" | "SUP"]: number;
-  // } = {
-  //   LIQ: 4,
-  //   FRU: 8,
-  //   VEG: 4,
-  //   GRA: 1,
-  //   NUT: 8,
-  //   SUP: 16,
-  // };
+  // "Units" out of 4. So 4 --> 1 cups/tbsp, 8 --> 2 cups/tbsp, 1 --> 0.25 cups/tbsp, etc.
+  const quantityKey: {
+    [key in "LIQ" | "FRU" | "VEG" | "GRA" | "NUT" | "SUP"]: number;
+  } = {
+    LIQ: 4,
+    FRU: 8,
+    VEG: 4,
+    GRA: 1,
+    NUT: 8,
+    SUP: 16,
+  };
 
-  // for (const [key, value] of Object.entries(groupedIngredients)) {
-  //   const quantity = Number(
-  //     quantityKey[key as keyof typeof quantityKey] / value.length
-  //   );
+  for (const [key, value] of Object.entries(groupedIngredients)) {
+    const quantity = Number(
+      quantityKey[key as keyof typeof quantityKey] / value.length
+    );
 
-  //   value.forEach((ingredientId) => {
-  //     smoothieIngredients.push({
-  //       IngredientID: ingredientId,
-  //       Quantity: quantity,
-  //     });
-  //   });
-  // }
+    value.forEach((ingredientId) => {
+      smoothieIngredients.push({
+        IngredientID: ingredientId,
+        Quantity: quantity,
+      });
+    });
+  }
+
+  console.log("smoothieIngredients: ", smoothieIngredients);
 
   // const UrlCode = smoothieIngredients
   //   .map((i) => `${i.IngredientID}A${i.Quantity}C`)
@@ -107,66 +120,31 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   //   UrlCode: UrlCode,
   // };
 
-  // // return data in response
-  // return new Response(JSON.stringify(data), {
-  //   status: 200,
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // });
+  let errors = await validate(groupedIngredients);
+  if (errors) {
+    return json({ ok: false, errors }, 400);
+  }
 
-  return {
-    errors: {
-      LIQ: "CHOOSE A LIQUID",
-      FRU: "CHOOSE A FRUIT",
-      VEG: "CHOOSE A VEGETABLE",
-      GRA: "CHOOSE A GRAIN/LEGUME",
-      NUT: "CHOOSE A NUT/SEED",
-      SUP: "CHOOSE A SUPERFOOD",
-    },
-  };
+  return redirect("/recipe/1234");
 };
-
-// Had to add this because typescript is too stupid to understand what a "?" means
 
 export default function Index() {
   const mainDivTest = useRef<HTMLDivElement>(null);
-  const { groupedIngredients } = useLoaderData<typeof loader>();
+  const { groupedIngredientData } = useLoaderData<typeof loader>();
   const actionResult = useActionData<ActionResultErrors>();
-  // const actionResult: ActionResultErrors = {
-  //   errors: {
-  //     LIQ: "CHOOSE A LIQUID",
-  //     FRU: "CHOOSE A FRUIT",
-  //     VEG: "CHOOSE A VEGETABLE",
-  //     GRA: "CHOOSE A GRAIN/LEGUME",
-  //     NUT: "CHOOSE A NUT/SEED",
-  //     SUP: "CHOOSE A SUPERFOOD",
-  //   },
-  // };
-
-  useEffect(() => {
-    console.log("groupedIngredients", groupedIngredients);
-    console.log("actionResult", actionResult);
-  });
-
-  // useEffect(() => {
-  //   if (actionResult && mainDivTest.current) {
-  //     mainDivTest.current.innerHTML = JSON.stringify(actionResult);
-  //   }
-  // }, [actionResult]);
 
   return (
     <>
       <div ref={mainDivTest} className="max-w-[825px] m-auto">
         <Form method="post">
-          {Object.keys(groupedIngredients).map((category) => {
+          {Object.keys(groupedIngredientData).map((category) => {
             const categoryKey = category.substring(0, 3);
             const validKeys = ["LIQ", "FRU", "VEG", "GRA", "NUT", "SUP"];
             return (
               <IngredientCategorySelect
                 key={categoryKey}
                 category={category}
-                ingredients={groupedIngredients[category]}
+                ingredients={groupedIngredientData[category]}
                 error={
                   validKeys.includes(categoryKey)
                     ? actionResult?.errors?.[categoryKey] ?? null

@@ -26,10 +26,11 @@ DONE:
 - add blender picture
 - add meta tag OG tag
 - make max checks for each category
+- create recipe route, and have it just show the url paramater in text on the page
+- form validation
 
 TO DO:
 
-- form validation
 - make action function create a get link to a recipe page in format "{IngredientID}A{AMOUNT}C{IngredientID}A{AMOUNT}" e.g. "/recipe/1A12C3A4C9A6" where "AMOUNT" is /12 (can be cups or tbsp, depends on ingredient category, but that can be found from database and doesn't need to be encoded)
 
 - get clock and fork/knife icons
