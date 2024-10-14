@@ -1,3 +1,6 @@
+import { GroupedIngredientIds } from "~/types/GroupedIngredientIds";
+import { Ingredient, IngredientsData } from "~/types/IngredientsData";
+
 const db = {
   users: [
     {
@@ -790,12 +793,25 @@ export function getIngredients() {
   return db.ingredients;
 }
 
-export function getIngredientsByIds(ids) {
-  const ingredients = db.ingredients.filter((i) =>
-    ids.includes(i.IngredientID)
-  );
-  return ingredients.reduce((acc, ingredient) => {
-    acc[ingredient.IngredientID] = ingredient;
-    return acc;
-  }, {});
+export function getIngredientsByIds(
+  groupedIngredients: GroupedIngredientIds
+): IngredientsData {
+  const result = {} as IngredientsData;
+
+  for (const category in groupedIngredients) {
+    if (groupedIngredients.hasOwnProperty(category)) {
+      result[category] =
+        groupedIngredients[category]?.map((id) => {
+          const ingredient = db.ingredients.find(
+            (ingredient) => ingredient.IngredientID === id
+          );
+          if (!ingredient) {
+            throw new Error(`Ingredient with ID ${id} not found`);
+          }
+          return ingredient;
+        }) || [];
+    }
+  }
+
+  return result;
 }

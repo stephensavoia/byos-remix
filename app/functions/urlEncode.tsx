@@ -1,7 +1,7 @@
-import { GroupedIngredients } from "~/types/GroupedIngredients";
+import { GroupedIngredientIds } from "~/types/GroupedIngredientIds";
 
 export function urlEncode(
-  groupedIngredients: GroupedIngredients,
+  groupedIngredients: GroupedIngredientIds,
   smoothieName: string
 ) {
   let cleanSmoothieName = smoothieName

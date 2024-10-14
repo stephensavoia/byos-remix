@@ -28,9 +28,16 @@ DONE:
 - make max checks for each category
 - create recipe route, and have it just show the url paramater in text on the page
 - form validation
+- make action function create a get link to a recipe page in format "{IngredientID}A{AMOUNT}C{IngredientID}A{AMOUNT}" e.g. "/recipe/1A12C3A4C9A6" where "AMOUNT" is /12 (can be cups or tbsp, depends on ingredient category, but that can be found from database and doesn't need to be encoded)
 
 TO DO:
 
-- make action function create a get link to a recipe page in format "{IngredientID}A{AMOUNT}C{IngredientID}A{AMOUNT}" e.g. "/recipe/1A12C3A4C9A6" where "AMOUNT" is /12 (can be cups or tbsp, depends on ingredient category, but that can be found from database and doesn't need to be encoded)
-
+- make width of print page same as other page
 - get clock and fork/knife icons
+- title
+- divider
+- add all ingredient data to json fake db
+- paragraph component
+- Ingredients component
+- directions (same for all)
+- nutrition facts component

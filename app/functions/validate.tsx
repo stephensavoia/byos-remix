@@ -1,7 +1,6 @@
-import { GroupedIngredients } from "~/types/GroupedIngredients";
+import { GroupedIngredientIds } from "../types/GroupedIngredientIds";
 
-export async function validate(groupedIngredients: GroupedIngredients) {
-  console.log("groupedIngredientsVALIDATE: ", groupedIngredients);
+export async function validate(groupedIngredients: GroupedIngredientIds) {
   let errors: {
     LIQ?: string;
     FRU?: string;

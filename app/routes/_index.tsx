@@ -7,7 +7,6 @@ import {
   useActionData,
   useLoaderData,
 } from "@remix-run/react";
-import { useRef } from "react";
 import IngredientCategorySelect from "~/components/IngredientCategorySelect";
 import { getIngredients } from "~/db/smoothies";
 import { validate } from "~/functions/validate";
