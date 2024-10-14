@@ -7,10 +7,11 @@ import {
   useActionData,
   useLoaderData,
 } from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import IngredientCategorySelect from "~/components/IngredientCategorySelect";
 import { getIngredients } from "~/db/smoothies";
 import { validate } from "~/functions/validate";
+import { urlEncode } from "~/functions/urlEncode";
 
 export const meta: MetaFunction = ({ matches }) => {
   const parentMeta = matches.flatMap((match) => match.meta ?? []);
@@ -40,6 +41,7 @@ export const meta: MetaFunction = ({ matches }) => {
   ];
 };
 
+// TO DO: memoize this loader function because it is the same every time it loads
 export async function loader() {
   const ingredients = getIngredients();
 
@@ -66,7 +68,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const groupedIngredients: { [key: string]: number[] } = {};
   let smoothieName = "My Smoothie";
-  const smoothieIngredients: { IngredientID: number; Quantity: number }[] = [];
 
   for (let [key, value] of formData.entries()) {
     if (groupedIngredients[key]) {
@@ -80,62 +81,23 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     }
   }
 
-  console.log("formData: ", formData);
-  console.log("groupedIngredients: ", groupedIngredients);
-
-  // "Units" out of 4. So 4 --> 1 cups/tbsp, 8 --> 2 cups/tbsp, 1 --> 0.25 cups/tbsp, etc.
-  const quantityKey: {
-    [key in "LIQ" | "FRU" | "VEG" | "GRA" | "NUT" | "SUP"]: number;
-  } = {
-    LIQ: 4,
-    FRU: 8,
-    VEG: 4,
-    GRA: 1,
-    NUT: 8,
-    SUP: 16,
-  };
-
-  for (const [key, value] of Object.entries(groupedIngredients)) {
-    const quantity = Number(
-      quantityKey[key as keyof typeof quantityKey] / value.length
-    );
-
-    value.forEach((ingredientId) => {
-      smoothieIngredients.push({
-        IngredientID: ingredientId,
-        Quantity: quantity,
-      });
-    });
-  }
-
-  console.log("smoothieIngredients: ", smoothieIngredients);
-
-  // const UrlCode = smoothieIngredients
-  //   .map((i) => `${i.IngredientID}A${i.Quantity}C`)
-  //   .join("");
-
-  // const data = {
-  //   RecipeName: smoothieName,
-  //   Ingredients: smoothieIngredients,
-  //   UrlCode: UrlCode,
-  // };
-
   let errors = await validate(groupedIngredients);
   if (errors) {
     return json({ ok: false, errors }, 400);
   }
 
-  return redirect("/recipe/1234");
+  let url = urlEncode(groupedIngredients, smoothieName);
+
+  return redirect(url);
 };
 
 export default function Index() {
-  const mainDivTest = useRef<HTMLDivElement>(null);
   const { groupedIngredientData } = useLoaderData<typeof loader>();
   const actionResult = useActionData<ActionResultErrors>();
 
   return (
     <>
-      <div ref={mainDivTest} className="max-w-[825px] m-auto">
+      <div className="max-w-[825px] m-auto">
         <Form method="post">
           {Object.keys(groupedIngredientData).map((category) => {
             const categoryKey = category.substring(0, 3);

@@ -789,3 +789,13 @@ const db = {
 export function getIngredients() {
   return db.ingredients;
 }
+
+export function getIngredientsByIds(ids) {
+  const ingredients = db.ingredients.filter((i) =>
+    ids.includes(i.IngredientID)
+  );
+  return ingredients.reduce((acc, ingredient) => {
+    acc[ingredient.IngredientID] = ingredient;
+    return acc;
+  }, {});
+}
